@@ -108,23 +108,17 @@ class Model(object):
 
     @classmethod
     def find_all(cls, **kwargs):
-        """
-        用法如下，kwargs 是只有一个元素的 dict
-        u = User.find_all(username='gua')
-        """
+        ms = []
         log('kwargs, ', kwargs, type(kwargs))
-        models = []
-        for m in cls.all():
-            exist = True
-            # 第一个查询条件不符合要求 第二个符合要求
-            for key, value in kwargs.items():
-                k, v = key, value
-                if v != getattr(m, k):
-                    exist = False
-                    break
-            if exist:
-                models.append(m)
-        return models
+        k, v = '', ''
+        for key, value in kwargs.items():
+            k, v = key, value
+        all = cls.all()
+        for m in all:
+            # 也可以用 getattr(m, k) 取值
+            if v == m.__dict__[k]:
+                ms.append(m)
+        return ms
 
     def __repr__(self):
         """
