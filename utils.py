@@ -10,7 +10,7 @@ def log(*args, **kwargs):
     dt = time.strftime(format, value)
     print(dt, *args, **kwargs)
     # a append 追加模式
-    with open('log.whister.txt', 'a', encoding='utf-8') as f:
+    with open('whister.log.txt', 'a', encoding='utf-8') as f:
         print(dt, *args, file=f, **kwargs)
 
 
